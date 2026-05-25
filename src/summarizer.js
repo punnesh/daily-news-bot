@@ -57,9 +57,9 @@ Start directly with the news items. Make it engaging, analytical, and highly det
       if (retries === 0) {
         return `Failed to generate news summary for ${categoryName} after multiple attempts. (Error: ${error.message})`;
       }
-      // Wait 10 seconds before trying again to let the rate limit reset
-      console.log(`Waiting 10 seconds before retrying ${categoryName}...`);
-      await sleep(10000);
+      // Wait 25 seconds before trying again to let the rate limit completely reset
+      console.log(`Waiting 25 seconds before retrying ${categoryName}...`);
+      await sleep(25000);
     }
   }
 }

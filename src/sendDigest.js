@@ -84,13 +84,16 @@ async function run() {
       await new Promise(r => setTimeout(r, 1000));
     }
     
-    // Wait 10 seconds before summarizing the next category to avoid Gemini rate limits
-    console.log('Waiting 10 seconds before processing next category...');
-    await new Promise(r => setTimeout(r, 10000));
+    // Wait 20 seconds before summarizing the next category to avoid Gemini rate limits
+    console.log('Waiting 20 seconds before processing next category...');
+    await new Promise(r => setTimeout(r, 20000));
   }
 
   await safeSendMessage(`✅ *Daily Digest Complete!* Have a great day!`, lastMessageId);
   console.log('Finished sending all categories.');
+  
+  // Force Node.js to exit so the GitHub Action completes immediately
+  process.exit(0);
 }
 
 run();

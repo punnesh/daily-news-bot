@@ -28,11 +28,14 @@ async function fetchNews() {
         const feed = await parser.parseURL(url);
         
         // Filter items that were published in the last 24 hours
-        const recentItems = feed.items.filter(item => {
+        let recentItems = feed.items.filter(item => {
           if (!item.pubDate) return true; // Keep if no date available
           const pubDate = new Date(item.pubDate);
           return pubDate > oneDayAgo;
-        }).map(item => ({
+        });
+
+        // Hard cap at 20 items per feed to prevent massive context payloads that crash the LLM
+        recentItems = recentItems.slice(0, 20).map(item => ({
           title: item.title,
           link: item.link,
           contentSnippet: item.contentSnippet || item.content || ''
