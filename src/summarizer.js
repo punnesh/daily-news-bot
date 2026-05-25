@@ -38,7 +38,7 @@ Start directly with the news items. Make it engaging, analytical, and highly det
   while (retries > 0) {
     try {
       const response = await ai.models.generateContent({
-        model: 'gemini-1.5-flash',
+        model: 'gemini-2.0-flash',
         contents: prompt,
         config: {
           // Lowering the safety filters because World News/Geopolitics often trigger false positives
@@ -55,7 +55,7 @@ Start directly with the news items. Make it engaging, analytical, and highly det
       console.error(`Attempt ${4 - retries} failed for ${categoryName}:`, error.message);
       retries--;
       if (retries === 0) {
-        return `Failed to generate news summary for ${categoryName} after multiple attempts. (Error: ${error.message})`;
+        return `⚠️ *Failed to generate news summary for ${categoryName}* after multiple attempts. Please check GitHub Actions logs for details.`;
       }
       // Wait 25 seconds before trying again to let the rate limit completely reset
       console.log(`Waiting 25 seconds before retrying ${categoryName}...`);
