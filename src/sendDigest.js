@@ -83,6 +83,10 @@ async function run() {
       // Wait a second to avoid Telegram rate limits
       await new Promise(r => setTimeout(r, 1000));
     }
+    
+    // Wait 10 seconds before summarizing the next category to avoid Gemini rate limits
+    console.log('Waiting 10 seconds before processing next category...');
+    await new Promise(r => setTimeout(r, 10000));
   }
 
   await safeSendMessage(`✅ *Daily Digest Complete!* Have a great day!`, lastMessageId);
